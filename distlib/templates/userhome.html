@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block main %}
+
+
+<h2>Search</h2>
+<form action="/searchbooks/" method="GET">
+<label for="q">Search for books: </label>
+<input type="text" name="q" value="">
+<input type="submit" value="Search">
+</form>
+<form action="/searchcircles/" method="GET">
+<label for="q">Search for circles: </label>
+<input type="text" name="q" value="">
+<input type="submit" value="Search">
+</form>
+<h2>Books</h2>
+
+{% if books %}
+<h3>Books in your shelf:</h3>
+<ul>
+{% for book in books %}
+<li>{{ book.title|escape }}, {{book.author|escape}}</li>
+{% endfor %}
+</ul>
+{% else %}
+Start by adding books to your shelf !
+<br/>
+<br/>
+{% endif %}
+
+<form action="/addbook/" method="POST">
+
+<label for="title">Title: </label>
+<input type="text" name="title" value="">
+<label for="author">Author: </label>
+<input type="text" name="author" value="">
+
+
+<input type="submit" value="Add">
+</form>
+<h2>Circles</h2>
+{% if circles %}
+<h3>Your circles:</h3>
+<ul>
+{% for circle in circles %}
+<li><a href="/circles/{{ circle }}/">{{ circle|escape }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+You are not in any circles. Join circles and start sharing books !
+{% endif %}
+
+<h2>Notifications</h2>
+{% if notifications %}
+<h3>New notifications:</h3>
+{% for notification in notifications %}
+<li>
+<strong>from: {{ notification.fromuser }} title: {{ notification.book }}</strong>
+<br/>
+{{ notification.message }}
+<br/>
+<a href = "/respond/{{ notification.id }}/accept/">accept</a> : <a href = "/respond/{{ notification.id }}/deny/">deny</a> : <a href = "/respond/{{ notification.id }}/ignore/">ignore</a>	
+
+	
+</h3>
+
+</li>
+{% endfor %}
+{% else %}
+No unread notifications
+{% endif %}
+
+{% endblock %}

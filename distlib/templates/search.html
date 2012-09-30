@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block main %}
+<body>
+<h1>Search</h1>
+<form action="/searchbooks/" method="GET">
+<label for="q">Search for books: </label>
+<input type="text" name="q" value="">
+<input type="submit" value="Search">
+</form>
+<form action="/searchcircles/" method="GET">
+<label for="q">Search for circles: </label>
+<input type="text" name="q" value="">
+<input type="submit" value="Search">
+</form>
+{% if query %}
+<h2>Results for "{{ query|escape }}":</h2>
+{% if resulttype == "books" %}
+{% if results %}
+{% for object in results %}
+<li>{{ object.title }}, {{ object.author }} of <a href = "/user/{{ object.bookowner }}/">{{ object.bookowner }} </a> : <a href = "/ask/{{object.bookowner}}/{{ object.title}}/"> ask </a></li>
+{% endfor %}
+{% else %}
+<p>No books found in your circles</p>
+{% endif %}
+{% else %}
+{% if results %}
+{% for object in results %}
+<li><a href="/circles/{{ object }}"> {{ object|escape }} </a></li>
+{% endfor %}
+{% else %}
+<p>No circles found. <a href="/createcircle">Create a cicle</a></p>
+{% endif %}
+{% endif %}
+{% endif %}
+</body>
+
+{% endblock %}

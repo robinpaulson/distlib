@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block main %}
+
+
+<h2>Search</h2>
+<form action="/searchbooks/" method="GET">
+<label for="q">Search for books: </label>
+<input type="text" name="q" value="">
+<input type="submit" value="Search">
+</form>
+<form action="/searchcircles/" method="GET">
+<label for="q">Search for circles: </label>
+<input type="text" name="q" value="">
+<input type="submit" value="Search">
+</form>
+
+{% endblock %}

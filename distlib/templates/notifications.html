@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block main %}
+
+
+<h2>Notifications</h2>
+{% if notifications %}
+<h3>New notifications:</h3>
+{% for notification in notifications %}
+<li>
+<strong>from: {{ notification.fromuser }} title: {{ notification.book }}</strong>
+<br/>
+{{ notification.message }}
+<br/>
+<a href = "/respond/{{ notification.id }}/accept/">accept</a> : <a href = "/respond/{{ notification.id }}/deny/">deny</a> : <a href = "/respond/{{ notification.id }}/ignore/">ignore</a>	
+
+	
+</h3>
+
+</li>
+{% endfor %}
+{% else %}
+No unread notifications
+{% endif %}
+
+{% endblock %}

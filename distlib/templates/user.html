@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>{{ user }} </h1>
+
+{% if books %}
+Has the following books:
+<br/>
+
+{% for book in books %}
+<li> {{ book }} <a href="/ask/{{ user }}/{{ book.title }}/"> ask </a></li>
+{% endfor %}
+{% else %}
+Has not added any books yet
+{% endif %}
+<br/>
+<br/>
+
+{% if circles %}
+Member of the following circles:
+<br/>
+<br/>
+{% for circle in circles %}
+<li><a href="/circles/{{ circle}}/">{{ circle }}</a></li>
+{% endfor %}
+{% else %}
+Not a memeber of any circles yet.
+{% endif %}
+<br/>
+
+{% endblock %}

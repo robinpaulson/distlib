@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block main %}
+<h2>Create a circle</h2>	
+{% if error_message %}
+<p> Error: {{ error_message }} </p>
+{% endif %}
+<form action="/createcircle/" method="POST">
+Circle name:
+<input type="text" name="circlename" value="">
+<br/>
+Circle type:
+<select name = "circletype">
+  <option value="workplace">Workplace</option>
+  <option value="college">College</option>
+  <option value="locality">Locality</option>
+</select>
+<br/>
+<input type="submit" value="Submit">
+</form>
+
+{% endblock %}

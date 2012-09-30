@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block main %}
+
+	{% for volume in bookvolumes %}
+		{{ volume.title }} : {{ volume.isbn10 }}
+		<br/>
+		{% for author in volume.authors %}
+			{{ author }} &nbsp;
+		{% endfor %}
+		<br/>
+		<img src = "{{ volume.imageurl }}">
+		
+		
+		<form action="/addbook/{{ volume.isbn10 }}/" method="POST">
+		<input type="submit" value = "Add this book to my shelf">
+		</form>
+		
+		<br/>
+		<br/>
+		
+	{% endfor %}
+
+{% endblock %}
