@@ -5,7 +5,8 @@ from models import Book
 from models import Circle
 from models import CircleUsers
 from models import User
-from models import User
+from models import Volume
+from models import Item
 from models import Notifications
 from forms import LoginForm
 from volumedata import VolumeData
@@ -16,7 +17,6 @@ def searchbooks(request):
     u = request.session.get('username', '')
     print "u is %s"  % u
     userobject = User.objects.get(username=u)
-    print type(userobject)
     if not u:
         return render_to_response("login.html")
     query = request.GET.get('q','')
@@ -25,18 +25,18 @@ def searchbooks(request):
     for circleuserrow in circleusers:
         circles.append(circleuserrow.circle)
     print circles
-    users = CircleUsers.objects.filter(circle__in=circles).distinct()
-    for user in users:
-        for circleuser in circleusers:
-            if user == circleuser.user:
-                usercirclemap[user] = circleuser.circle
-    print users
-    books = Book.objects.filter(bookowner__in=users).filter(title__icontains=query).distinct()
-        
-    print books
+    circleusers = CircleUsers.objects.filter(circle__in=circles).distinct()
+    users = []
+    for circleuser in circleusers:
+        users.append(circleuser.user)
+
+    outerItems = Item.objects.filter(bookowner__in=users).distinct()
+    for outerItem in outerItems:
+        if(query in outerItem.volume.title):
+            items.append(item)
 
     return render_to_response("search.html", {
-        "results": books,
+        "results": items,
         "query": query,
         "resulttype": "books",
 })
@@ -63,7 +63,10 @@ def circledetails(request, circlename):
     
 def userdetails(request, username):
     userobject = User.objects.get(username=username)
-    books = Book.objects.filter(bookowner=userobject)
+    books = []
+    items = Item.objects.filter(bookowner=userobject)
+    for item in items:
+        books.append(item.volume)
     circleusers = CircleUsers.objects.filter(user=userobject)
     circles = []
     for circleuserrow in circleusers:
@@ -121,17 +124,14 @@ def books(request):
     if not userobject:
         return render_to_response("login.html")
     else:
-        books = Book.objects.filter(bookowner = userobject)
-        usersCircles = []
-        circleUsers = CircleUsers.objects.filter(user=userobject)
-        notifications = Notifications.objects.filter(touser=userobject)
-        for circleUserRow in circleUsers:
-            usersCircles.append(circleUserRow.circle)
+        items = Item.objects.filter(bookowner = userobject)
+        books = []
+        for item in items:
+            books.append(item.volume)
+
         return render_to_response("books.html", {
             "user": userobject,
-            "books": books,
-            "circles": usersCircles,
-            "notifications": notifications
+            "books": books
             })
         
 def circles(request):
@@ -139,17 +139,13 @@ def circles(request):
     if not userobject:
         return render_to_response("login.html")
     else:
-        books = Book.objects.filter(bookowner = userobject)
         usersCircles = []
         circleUsers = CircleUsers.objects.filter(user=userobject)
-        notifications = Notifications.objects.filter(touser=userobject)
         for circleUserRow in circleUsers:
             usersCircles.append(circleUserRow.circle)
         return render_to_response("circles.html", {
             "user": userobject,
-            "books": books,
-            "circles": usersCircles,
-            "notifications": notifications
+            "circles": usersCircles
             })
 
 def notifications(request):
@@ -157,16 +153,9 @@ def notifications(request):
     if not userobject:
         return render_to_response("login.html")
     else:
-        books = Book.objects.filter(bookowner = userobject)
-        usersCircles = []
-        circleUsers = CircleUsers.objects.filter(user=userobject)
         notifications = Notifications.objects.filter(touser=userobject)
-        for circleUserRow in circleUsers:
-            usersCircles.append(circleUserRow.circle)
         return render_to_response("notifications.html", {
             "user": userobject,
-            "books": books,
-            "circles": usersCircles,
             "notifications": notifications
             })
         
@@ -214,6 +203,19 @@ def authenticate(request):
             return(home(request))
     else:
         return render_to_response("login.html",{'form': LoginForm()})
+    
+def addvolume(request, isbn10):
+    u = request.session.get('username', '')
+    userobject = User.objects.get(username=u)
+    if not u:
+        return render_to_response("signup.html")
+    
+    volume = Volume.objects.get(isbn10=isbn10)
+    item = Item.objects.create(volume = volume, bookowner=userobject)
+    item.save()
+    
+    return books(request)
+    
 
 def addbook(request):
     u = request.session.get('username', '')
@@ -254,10 +256,22 @@ def addbook(request):
         if isbn10 in isbn10s:
             continue
         else:
-            isbn10s.append(isbn10)    
+            isbn10s.append(isbn10)
+            
+        authorsString = ""
+        for author in authors:
+            authorsString += ","
+            authorsString += author
         
-        bookvolume = VolumeData(title, authors, thumbnail, isbn10)
-        bookvolumes.append(bookvolume)
+        volume = ""
+        existingVolumes = Volume.objects.filter(isbn10 = isbn10)
+        if not existingVolumes:
+            volume = Volume.objects.create(title=title, authors=authorsString, isbn10=isbn10, imageurl=thumbnail)
+            volume.save()
+        else:
+            volume = existingVolumes[0]
+        
+        bookvolumes.append(volume)
         
     print bookvolumes
     return render_to_response("addbooks.html",{
@@ -314,4 +328,3 @@ def asked(request, touser, bookname):
     print message
     notificationobject = Notifications.objects.create(fromuser=fromuserobject, touser=touserobject, book=book, message=message, type= type)    
     return home(request)
-    

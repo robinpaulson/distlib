@@ -5,6 +5,7 @@ from distlib.distlibapp.views import createcircle
 from distlib.distlibapp.views import login
 from distlib.distlibapp.views import authenticate
 from distlib.distlibapp.views import addbook
+from distlib.distlibapp.views import addvolume
 from distlib.distlibapp.views import signup
 from distlib.distlibapp.views import circledetails
 from distlib.distlibapp.views import userdetails
@@ -32,6 +33,7 @@ urlpatterns = patterns('',
     (r'^login/$', login),
     (r'^authenticate/$', authenticate),
     (r'^addbook/$', addbook),
+    (r'^addbook/(.*?)/$', addvolume),
     (r'^signup/$', signup),
     (r'^circles/(.*?)/$',circledetails),
     (r'^addtocircle/(.*?)/$',addtocircle),

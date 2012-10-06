@@ -17,6 +17,21 @@ class CircleUsers(models.Model):
 	circle = models.ForeignKey(Circle)
 	user = models.ForeignKey(User)
 	
+class Volume(models.Model):
+	title = models.CharField(max_length=100)
+	authors = models.CharField(max_length=500)
+	isbn10 = models.CharField(max_length=30)
+	imageurl = models.CharField(max_length=200)
+	def __str__(self):
+		return "%s-%s by %s" % (self.title, self.isbn10, self.authors)
+	
+class Item(models.Model):
+	volume = models.ForeignKey(Volume)
+	bookowner = models.ForeignKey(User)
+	
+	def __str__(self):
+		return "%s of %s" % (self.volume, self.bookowner)
+	
 class Book(models.Model):
 	title = models.CharField(max_length=100)
 	author = models.CharField(max_length=100)
@@ -32,4 +47,3 @@ class Notifications(models.Model):
 	message = models.CharField(max_length = 3999)
 	def __str__(self):
                 return "from: %s, to: %s message:%s" % (self.fromuser, self.touser, self.message)
-	

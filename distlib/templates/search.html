@@ -17,7 +17,7 @@
 {% if resulttype == "books" %}
 {% if results %}
 {% for object in results %}
-<li>{{ object.title }}, {{ object.author }} of <a href = "/user/{{ object.bookowner }}/">{{ object.bookowner }} </a> : <a href = "/ask/{{object.bookowner}}/{{ object.title}}/"> ask </a></li>
+<li>{{ object.volume.title }}, {{ object.volume.authors }} of <a href = "/user/{{ object.bookowner }}/"> {{ object.bookowner }} </a> : <a href = "/ask/{{object.bookowner}}/{{ object.title}}/"> ask </a></li>
 {% endfor %}
 {% else %}
 <p>No books found in your circles</p>

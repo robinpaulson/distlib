@@ -4,9 +4,7 @@
 	{% for volume in bookvolumes %}
 		{{ volume.title }} : {{ volume.isbn10 }}
 		<br/>
-		{% for author in volume.authors %}
-			{{ author }} &nbsp;
-		{% endfor %}
+		{{ volume.authors }}
 		<br/>
 		<img src = "{{ volume.imageurl }}">
 		

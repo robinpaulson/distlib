@@ -8,7 +8,8 @@
 <h3>Books in your shelf:</h3>
 <ul>
 {% for book in books %}
-<li>{{ book.title|escape }}, {{book.author|escape}}</li>
+<li>{{ book.title|escape }}, {{book.authors|escape}}</li>
+<br> <img src = "{{ book.imageurl}}">
 {% endfor %}
 </ul>
 {% else %}

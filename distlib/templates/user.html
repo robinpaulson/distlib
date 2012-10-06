@@ -5,9 +5,11 @@
 {% if books %}
 Has the following books:
 <br/>
+<br/>
+<br/>
 
 {% for book in books %}
-<li> {{ book }} <a href="/ask/{{ user }}/{{ book.title }}/"> ask </a></li>
+<li> {{ book.title }}, {{ book.authors}} <br/> <img src=" {{ book.imageurl }}"> <br/><a href="/ask/{{ user }}/{{ book.title }}/"> ask </a></li>
 {% endfor %}
 {% else %}
 Has not added any books yet
