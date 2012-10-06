@@ -3,23 +3,33 @@
 
 
 <h2>Notifications</h2>
+
 {% if notifications %}
-<h3>New notifications:</h3>
+<table class="table table-striped table-bordered">
+<tbody>
 {% for notification in notifications %}
-<li>
-<strong>from: {{ notification.fromuser }} title: {{ notification.book }}</strong>
-<br/>
-{{ notification.message }}
-<br/>
-<a href = "/respond/{{ notification.id }}/accept/">accept</a> : <a href = "/respond/{{ notification.id }}/deny/">deny</a> : <a href = "/respond/{{ notification.id }}/ignore/">ignore</a>	
-
-	
-</h3>
-
-</li>
+<tr>
+	<td>{{ notification.fromuser }}</td>
+	<td>{{ notification.book }}</td>
+	<td>{{ notification.message }}</td>
+	<td><a href = "/respond/{{ notification.id }}/accept/">accept</a></td>
+	<td><a href = "/respond/{{ notification.id }}/deny/">deny</a></td>
+	<td><a href = "/respond/{{ notification.id }}/ignore/">ignore</a></td>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% else %}
-No unread notifications
+<table class="table table-striped table-bordered">
+<tbody>
+<tr>
+<td>
+No notifications!
+</td>
+</tr>
+</tbody>
+</table>
 {% endif %}
+
 
 {% endblock %}

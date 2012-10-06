@@ -4,14 +4,17 @@
 
 <h2>Search</h2>
 <form action="/searchbooks/" method="GET">
-<label for="q">Search for books: </label>
-<input type="text" name="q" value="">
-<input type="submit" value="Search">
+	<div class="input-append">
+	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for books">
+	<button class="btn" type="submit" class="btn">Go</button>
+	</div>
 </form>
+
 <form action="/searchcircles/" method="GET">
-<label for="q">Search for circles: </label>
-<input type="text" name="q" value="">
-<input type="submit" value="Search">
+	<div class="input-append">
+	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for Circles">
+	<button class="btn" type="submit" class="btn">Go</button>
+	</div>
 </form>
 
 {% endblock %}

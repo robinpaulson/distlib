@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% block main %}
 
-	{% for volume in bookvolumes %}
-		{{ volume.title }} : {{ volume.isbn10 }}
-		<br/>
-		{{ volume.authors }}
-		<br/>
-		<img src = "{{ volume.imageurl }}">
-		
-		
-		<form action="/addbook/{{ volume.isbn10 }}/" method="POST">
-		<input type="submit" value = "Add this book to my shelf">
-		</form>
-		
-		<br/>
-		<br/>
-		
-	{% endfor %}
 
+<table class="table table-striped table-bordered">
+<tbody>
+{% for volume in bookvolumes %}
+<tr>
+	<td>
+		<form action="/addbook/{{ volume.isbn10 }}/" method="POST">
+		<input type="submit" value = "Add to shelf" class="btn">
+		</form>
+	</td>
+	<td><img src = "{{ volume.imageurl }}" class="img-rounded"></td>
+	<td>{{ volume.title }} : {{ volume.isbn10 }}</td>
+	<td>{{ volume.authors }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
 {% endblock %}

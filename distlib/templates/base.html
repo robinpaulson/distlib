@@ -1,109 +1,63 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
-<style type="text/css">
-body,
-html {
-margin:0;
-padding:0;
-color:#000;
-background:#99c;
-}
-
-#wrap {
-width:1000px;
-margin:0 auto;
-background:#99c;
-}
-
-#header {
-background:#ddd;
-}
-#main {
-background:#99c;
-}
-#sidebar {
-background:#c9c;
-}
-#footer {
-background:#cc9;
-}
-
-#header {
-float:left;
-width:750px;
-background:#ddd;
-}
-
-#logout {
-float:right;
-width:250px;
-background:#ddd;
-}
-
-#main {
-float:left;
-width:750px;
-background:#99c;
-}
-
-#footer {
-clear:both;
-background:#cc9;
-}
-
-#sidebar {
-float:right;
-width:250px;
-background:#99c;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </head>
-
-<div id="wrap">
-	
-	<div id="header">
+<body>
+	<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
 		{% block header %}
-		<h1>BookCircles</h1> 
+		<h1 align="center">BookCircles</h1>
 		{% endblock %}
+		</div>
 	</div>
 	
-	<div id = "logout">
-		{% block logout %}
-		<br/>
-		<br/>
-		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href= "/logout/">Logout</a>
-		<br/>
-		<br/>
-		{% endblock %}
+	<div class ="row-fluid">
+	<div class="span11">
+	<div class="navbar" >
+  		<div class="navbar-inner">
+    		<ul class="nav">
+      			<li><a href="/books/">Home</a></li>
+      			<li><a href="/circles/">Circles</a></li>
+      			<li><a href="/notifications/">Notifications</a></li>
+      			<li><a href="/searches/">Search</a></li>
+      			<li><a href="/about/">About</a></li>
+    		</ul>
+  		</div>
+	</div>
+	</div>
+	<div class="span1">
+	<div class="navbar" >
+  		<div class="navbar-inner">
+    		<ul class="nav">
+      			<li><a href="/logout/">Logout</a></li>
+    		</ul>
+  		</div>
+	</div>
+	</div>
 	</div>
 	
-	<div id="main">
-	{% block main %}
-	{% endblock %}	
+	<div class="hero-unit">
+			{% block main %}
+			{% endblock %}	
 	</div>
-	
-	
-	<div id="sidebar">
-	{% block sidebar %}
-		<ul>
-			<li><a href="/books/">Books</a></li>
-			<li><a href="/circles/">Circles</a></li>
-			<li><a href="/notifications/">Notifications</a></li>
-			<li><a href="/searches/">Search</a></li>
-			<li><a href="/about/">About</a></li>
-		</ul>
-	{% endblock %}
-	</div>
-	
-	<!--
-	<div id="footer">
-	{% block footer %}
-	BookCircles.com
-	{% endblock %}
-	</div>
-	-->
-	
-</div>
 
+	
+
+	
+	<div class="navbar navbar-fixed-bottom">
+	{% block footer %}
+	<p align="center">Copyright BookCircles.com</p>
+	{% endblock %}
+	</div>
+
+	</div>
+	
+
+</body>
 </html>

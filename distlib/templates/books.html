@@ -6,12 +6,19 @@
 
 {% if books %}
 <h3>Books in your shelf:</h3>
-<ul>
+<table class="table table-striped table-bordered">
+<tbody>
 {% for book in books %}
-<li>{{ book.title|escape }}, {{book.authors|escape}}</li>
-<br> <img src = "{{ book.imageurl}}">
+<tr>
+	<td><img src = "{{ book.imageurl}}" class="img-rounded"></td>
+	<td>{{ book.title|escape }} - {{book.authors|escape}}</td>
+	
+</tr>
 {% endfor %}
-</ul>
+</tbody>
+</table>
+<br/>
+<br/>
 {% else %}
 Start by adding books to your shelf !
 <br/>
@@ -19,9 +26,10 @@ Start by adding books to your shelf !
 {% endif %}
 
 <form action="/addbook/" method="POST">
-
-<label for="title">Title: </label>
-<input type="text" name="title" value="">
-<input type="submit" value="Add">
+	
+	<div class="input-append">
+	<input class="span6" id="appendedInputButton" size="16" type="text" name="title" placeholder="Add a book here and hit add">
+	<button class="btn" type="submit" class="btn">add</button>
+	</div>
 </form>
 {% endblock %}
