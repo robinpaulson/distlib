@@ -67,7 +67,7 @@ STATIC_URL = 'http:/localhost:9000/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-  "C:/distlib/distlib/distlibapp/static",
+  "C:/distlib/distlib/distlibapp/",
 
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.

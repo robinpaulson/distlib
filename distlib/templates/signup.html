@@ -7,14 +7,17 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body background="{{ STATIC_URL }}/static/bgbooks.jpg">
+	<br/>
 	<div class="container-fluid">
+	<div class="well well-large">
 	<div class="row-fluid">
 		<div class="span12">
 		{% block header %}
 		<h1 align="center">BookCircles</h1>
 		{% endblock %}
 		</div>
+	</div>
 	</div>
 	
 	<div class = "hero-unit">

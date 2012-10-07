@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% block main %}
-<h1>{{ user }} </h1>
+<h2>{{ user }} </h2>
 
 {% if books %}
-Has the following books:
-<br/>
-<br/>
-<br/>
+{{ user }}'s shelf:
 
+<table class="table table-striped table-bordered">
+<tbody>
 {% for book in books %}
-<li> {{ book.title }}, {{ book.authors}} <br/> <img src=" {{ book.imageurl }}"> <br/><a href="/ask/{{ user }}/{{ book.title }}/"> ask </a></li>
+<tr>
+	<td><img src = "{{ book.imageurl}}" class="img-rounded"></td>
+	<td>{{ book.title|escape }} - {{book.authors|escape}}</td>
+	<td><form action="/ask/{{user}}/{{book.title}}/" method="GET"><input type="submit" class="btn" value="Ask this book"></form></td>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% else %}
 Has not added any books yet
 {% endif %}
@@ -21,12 +26,17 @@ Has not added any books yet
 Member of the following circles:
 <br/>
 <br/>
+<table class="table table-striped table-bordered">
+<tbody>
 {% for circle in circles %}
-<li><a href="/circles/{{ circle}}/">{{ circle }}</a></li>
+<tr>
+	<td><a href="/circles/{{ circle}}/">{{ circle }}</a></td>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% else %}
 Not a memeber of any circles yet.
 {% endif %}
 <br/>
-
 {% endblock %}
