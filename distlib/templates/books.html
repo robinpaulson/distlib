@@ -7,7 +7,7 @@
 <tbody>
 {% for book in books %}
 <tr>
-	<td><img src = "{{ book.imageurl}}" class="img-rounded"></td>
+	<td><img src = "{{ book.imageurl}}" class="img-rounded" alt="{{ STATIC_URL}}/static/noimage.png"></td>
 	<td>{{ book.title|escape }} - {{book.authors|escape}}</td>
 </tr>
 {% endfor %}
