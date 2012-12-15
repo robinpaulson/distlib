@@ -7,21 +7,21 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body background="{{ STATIC_URL }}/static/bgbooks.jpg">
+
 	<br/>
-	<div class="container-fluid">
-	<div class="well well-large">
-	<div class="row-fluid">
-		<div class="span12">
+	<div class="container-fluid wrapper transparent">
+	<div class="well well-large wrapper transparent">
+	<div class="row-fluid wrapper transparent">
+		<div class="span12 wrapper transparent">
 		{% block header %}
-		<h1 align="center">BookCircles</h1>
+				<h1 align="center"><img src="/static/banner.png" /></h1>
 		{% endblock %}
 		</div>
 	</div>
 	</div>
-	<div class="hero-unit">
-		<div class="row-fluid">
-		<div class="span6">
+	<div class="hero-unit wrapper transparent">
+		<div class="row-fluid wrapper transparent">
+		<div class="span6 wrapper transparent">
 		<form action="/authenticate/" class="form-horizontal" method="POST">
 		<div class="control-group">
     		<label class="control-label" for="inputUsername">Username</label>

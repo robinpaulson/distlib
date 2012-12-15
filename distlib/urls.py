@@ -15,9 +15,7 @@ from distlib.distlibapp.views import asked
 from distlib.distlibapp.books import books
 from distlib.distlibapp.circles import circles
 from distlib.distlibapp.views import notifications
-from distlib.distlibapp.views import searches
 from distlib.distlibapp.views import logout
-from distlib.distlibapp.views import about
 from django.views.generic import TemplateView
 
 # Uncomment the next two lines to enable the admin:
@@ -41,8 +39,6 @@ urlpatterns = patterns('',
     (r'^books/$', books),
     (r'^circles/$', circles),
     (r'^notifications/$', notifications),
-    (r'^searches/$', searches),
-    (r'^about/$', about),
     (r'^home/', books),
     (r'^logout/', logout),
     (r'^$', books),

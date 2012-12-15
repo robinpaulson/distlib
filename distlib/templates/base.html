@@ -9,33 +9,34 @@
 </head>
 <body background="{{ STATIC_URL }}/static/bgbooks.jpg">
 	<br/>
+	<div class ="row-fluid">
+	<div class="span10 offset1">
 	<div class="container-fluid">
 	<div class="well well-small">
 	<div class="row-fluid">
-		<div class="span12">
 		{% block header %}
-		<h1 align="center">BookCircles</h1>
+		<h1 align="center"><img src="/static/banner.png" /></h1>
 		{% endblock %}
 		</div>
 	</div>
 	</div>
 	</div>	
 	</div>
+	</div>
 	
 	<div class ="row-fluid">
-	<div class="span11">
+	<div class="span9 offset1">
 	<div class="navbar" >
   		<div class="navbar-inner">
     		<ul class="nav">
       			<li><a href="/books/">Home</a></li>
       			<li><a href="/circles/">Circles</a></li>
       			<li><a href="/notifications/">Notifications</a></li>
-      			<li><a href="/searches/">Search</a></li>
-      			<li><a href="/about/">About</a></li>
     		</ul>
   		</div>
+	</div> 
 	</div>
-	</div>
+	
 	<div class="span1">
 	<div class="navbar" >
   		<div class="navbar-inner">
@@ -46,10 +47,14 @@
 	</div>
 	</div>
 	</div>
-	
+
+	<div class ="row-fluid">
+	<div class="span10 offset1">	
 	<div class="hero-unit">
 			{% block main %}
 			{% endblock %}	
+	</div>
+	</div>
 	</div>
 	
 

@@ -11,6 +11,7 @@ from forms import LoginForm
 from volumedata import VolumeData
 import urllib2
 import json
+from django.utils.datetime_safe import datetime
 
 def books(request):
     userobject = request.session.get('userobject');
@@ -24,45 +25,36 @@ def books(request):
 
     return render_to_response("books.html", {
             "user": userobject,
-            "books": books
+            "books": books,
             })
-
-
-def notifications(request):
+    
+def circles(request):
     userobject = request.session.get('userobject');
     if not userobject:
         return render_to_response("login.html")
     else:
+        usersCircles = []
+        circleUsers = CircleUsers.objects.filter(user=userobject)
+        for circleUserRow in circleUsers:
+            usersCircles.append(circleUserRow.circle)
+        return render_to_response("circles.html", {
+            "user": userobject,
+            "circles": usersCircles
+            })
+
+def notifications(request):
+    userobject = request.session.get('userobject'); 
+    if not userobject:
+        return render_to_response("login.html")
+    else:
+        #userobject.newMessages = 0;
+        #userobject.save();
+        request.session['userobject'] = userobject
         notifications = Notifications.objects.filter(touser=userobject)
         return render_to_response("notifications.html", {
             "user": userobject,
             "notifications": notifications
             })
-        
-def searches(request):
-    userobject = request.session.get('userobject');
-    if not userobject:
-        return render_to_response("login.html")
-    else:
-        items = Item.objects.filter(bookowner = userobject)
-        volumes = []
-        for item in items:
-            volumes.append(item.volume)
-        usersCircles = []
-        circleUsers = CircleUsers.objects.filter(user=userobject)
-        notifications = Notifications.objects.filter(touser=userobject)
-        for circleUserRow in circleUsers:
-            usersCircles.append(circleUserRow.circle)
-        return render_to_response("searches.html", {
-            "user": userobject,
-            "books": volumes,
-            "circles": usersCircles,
-            "notifications": notifications
-            })
-        
-def about(request):
-    return render_to_response('about.html')
-    
 
 def login(request):
     form = LoginForm()
@@ -104,24 +96,27 @@ def signup(request):
 
     return books(request)
     
-def ask(request, user, bookname):
+def ask(request, user, isbn):
     username = request.session.get('username')
     if not username:
         return render_to_response("signup.html")
+    volume = Volume.objects.get(isbn10 = isbn)
     return render_to_response("ask.html",{
                                           "to": user,
-                                          "title": bookname
+                                          "title": volume.title,
+                                          "isbn": volume.isbn10
     })
     
-def asked(request, touser, bookname):
+def asked(request, touser, isbn):
     username = request.session.get('username')
     fromuserobject = User.objects.get(username = username)
     if not username:
         return render_to_response("signup.html")
     touserobject = User.objects.get(username = touser)
     type = "ask"
-    book = Book.objects.get(title=bookname, bookowner=touserobject)
+    book = Volume.objects.get(isbn10=isbn)
+    item = Item.objects.get(volume=book, bookowner=touserobject)
     message = request.POST.get('message')
     print message
-    notificationobject = Notifications.objects.create(fromuser=fromuserobject, touser=touserobject, book=book, message=message, type= type)    
+    notificationobject = Notifications.objects.create(fromuser=fromuserobject, touser=touserobject, book=item, message=message, type= type)    
     return books(request)

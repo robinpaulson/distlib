@@ -4,12 +4,15 @@ class User(models.Model):
 	username = models.CharField(max_length=30)
 	emailid = models.EmailField()
 	password = models.CharField(max_length=60)
+	newMessages = models.IntegerField(default=0)
+	
 	def __str__(self):
                 return self.username
 
 class Circle(models.Model):
 	circlename = models.CharField(max_length=100)
 	circletype = models.CharField(max_length=20)
+	isprivate = models.BooleanField(default = True)
 	def __str__(self):
                 return self.circlename
 

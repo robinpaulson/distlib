@@ -1,5 +1,24 @@
 {% extends "base.html" %}
+
+<div id ="myModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>New Messages</h3>
+  </div>
+  <div class="modal-body">
+    <p>You have {{ user.newMessages }} new messages</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <a href="/notifications/" class="btn btn-primary">See Notifications</a>
+  </div>
+</div>
+
 {% block main %}
+
+<script>
+$('#myModal').modal()
+</script>
 
 {% if books %}
 <h2>Your shelf</h2>
@@ -26,6 +45,13 @@
 	<div class="input-append">
 	<input class="span6" id="appendedInputButton" size="16" type="text" name="title" placeholder="Add a book here and hit add">
 	<button class="btn" type="submit" class="btn">add</button>
+	</div>
+</form>
+
+<form action="/searchbooks/" method="GET">
+	<div class="input-append">
+	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for books">
+	<button class="btn" type="submit" class="btn">Go</button>
 	</div>
 </form>
 

@@ -8,6 +8,7 @@ from models import Volume
 from models import Item
 from models import Notifications
 from views import books
+from views import circles
 from forms import LoginForm
 from volumedata import VolumeData
 import urllib2
@@ -48,41 +49,28 @@ def searchcircles(request):
 }) 
 
     
-def createcircle(request):
+def createcircle(request, firsttime=False):
     u = request.session.get('username','')
     circlename = request.POST.get('circlename','')
     circletype = request.POST.get('circletype','')
+    isprivate = request.POST.get('isprivate', False);
     
     print "circlename is %s circletype is %s" % (circlename, circletype) 
-    if not circlename:
+    if not circlename and not firsttime:
         return render_to_response("createcircle.html",
                                   {"error_message":"circle name invalid"})
-    if not circletype:
+    if not circletype and not firsttime:
         return render_to_response("createcircle.html",
                                   {"error_message":"circle name invalid"})
     userobject = User.objects.get(username = u)
     if not u:
         return render_to_response("login.html")
     if circlename and circletype:
-        circleobject = Circle.objects.create(circlename=circlename, circletype=circletype)
+        circleobject = Circle.objects.create(circlename=circlename, circletype=circletype, isprivate=isprivate)
         circleusersobject = CircleUsers.objects.create(circle=circleobject, user=userobject)
-        return (books(request))
+        return (circles(request))
     else:
-        return render_to_response("createcircle.html")    
-    
-def circles(request):
-    userobject = request.session.get('userobject');
-    if not userobject:
-        return render_to_response("login.html")
-    else:
-        usersCircles = []
-        circleUsers = CircleUsers.objects.filter(user=userobject)
-        for circleUserRow in circleUsers:
-            usersCircles.append(circleUserRow.circle)
-        return render_to_response("circles.html", {
-            "user": userobject,
-            "circles": usersCircles
-            })
+        return render_to_response("createcircle.html")
 
 def addtocircle(request, circlename):
     username = request.session.get('username')
@@ -91,12 +79,14 @@ def addtocircle(request, circlename):
     userObject = User.objects.get(username=username)
     circleObject = Circle.objects.get(circlename=circlename)
     try:
-        if CircleUsers.objects.get(circle=circleObject, user=userObject) is None:
-            circleUsersObject = CircleUsers.objects.create(circle=circleobject, user=userobject)
+        circleUserEntry = CircleUsers.objects.get(circle=circleObject, user=userObject)
+    except CircleUsers.DoesNotExist:
+        circleUserObject = CircleUsers.objects.create(circle=circleObject, user=userObject)
+        circleUserObject.save()
     except:
         #do nothing
         print "swallowing exception"
-    return books(request)
+    return circles(request)
 
 def getCirclesForUserObject(userObject):
     circleusers = CircleUsers.objects.filter(user=userObject)

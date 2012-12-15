@@ -30,8 +30,12 @@ def searchbooks(request):
     users = getUsersInCircles(circles)
     items = getItemsForUsers(users)
 
+    shortlistedItems = []
+    for item in items:
+        if query.lower() in item.volume.title.lower():
+            shortlistedItems.append(item)
     return render_to_response("search.html", {
-        "results": items,
+        "results": shortlistedItems,
         "query": query,
         "resulttype": "books",
 })
@@ -78,8 +82,11 @@ def addbook(request):
             isbn10s.append(isbn10)
             
         authorsString = ""
+        first = True
         for author in authors:
-            authorsString += ","
+            if first == False:
+                authorsString += ","
+                first = False
             authorsString += author
         
         volume = ""
@@ -94,7 +101,7 @@ def addbook(request):
         
     print bookvolumes
     return render_to_response("addbooks.html",{
-                                               "bookvolumes": bookvolumes[0:6]
+                                               "bookvolumes": bookvolumes[0:9]
                                                })
                                                
     return (books(request))

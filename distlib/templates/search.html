@@ -3,20 +3,6 @@
 <body>
 <h1>Search</h1>
 
-<form action="/searchbooks/" method="GET">
-	<div class="input-append">
-	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for books">
-	<button class="btn" type="submit" class="btn">Go</button>
-	</div>
-</form>
-
-<form action="/searchcircles/" method="GET">
-	<div class="input-append">
-	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for Circles">
-	<button class="btn" type="submit" class="btn">Go</button>
-	</div>
-</form>
-
 {% if query %}
 <h2>Results for "{{ query|escape }}":</h2>
 {% if resulttype == "books" %}
