@@ -15,14 +15,9 @@
 </div>
 
 {% block main %}
-
-<script>
-$('#myModal').modal()
-</script>
-
 {% if books %}
 <h2>Your shelf</h2>
-<table class="table table-striped table-bordered">
+<table class="table table-striped">
 <tbody>
 {% for book in books %}
 <tr>
@@ -33,11 +28,9 @@ $('#myModal').modal()
 </tbody>
 </table>
 <br/>
-<br/>
 {% else %}
 <h3>Start by adding books to your shelf !</h3>
-<br/>
-<br/>
+<br/>	
 {% endif %}
 
 <form action="/addbook/" method="POST">
@@ -45,13 +38,6 @@ $('#myModal').modal()
 	<div class="input-append">
 	<input class="span6" id="appendedInputButton" size="16" type="text" name="title" placeholder="Add a book here and hit add">
 	<button class="btn" type="submit" class="btn">add</button>
-	</div>
-</form>
-
-<form action="/searchbooks/" method="GET">
-	<div class="input-append">
-	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for books">
-	<button class="btn" type="submit" class="btn">Go</button>
 	</div>
 </form>
 

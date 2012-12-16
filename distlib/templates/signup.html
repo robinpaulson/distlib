@@ -7,22 +7,22 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body background="{{ STATIC_URL }}/static/bgbooks.jpg">
+<body>
 	<br/>
-	<div class="container-fluid">
-	<div class="well well-large">
-	<div class="row-fluid">
+	<div class="container-fluid" style="background-color: transparent">
+	<div class="well well-large" style="background-color: transparent">
+	<div class="row-fluid" style="background-color: transparent">
 		<div class="span12">
 		{% block header %}
-		<h1 align="center">BookCircles</h1>
+		<h1 align="center">DronesClub</h1>
 		{% endblock %}
 		</div>
 	</div>
 	</div>
 	
-	<div class = "hero-unit">
-	<div class = "row-fluid">
-	<div class = "span6">
+	<div class = "hero-unit" style="background-color: transparent">
+	<div class = "row-fluid" style="background-color: transparent">
+	<div class = "span6" style="background-color: transparent">
 	<form action="/signup/" class="form-horizontal" method="POST">
 		<div class="control-group">
     		<label class="control-label" for="inputUsername">Username</label>

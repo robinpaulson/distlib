@@ -4,8 +4,7 @@
 
 <h2>Circles</h2>
 {% if circles %}
-<h3>Your circles:</h3>
-<table class="table table-striped table-bordered">
+<table class="table table-bordered">
 <tbody>
 {% for circle in circles %}
 <tr>
@@ -15,7 +14,7 @@
 </tbody>
 </table>
 {% else %}
-<table class="table table-striped table-bordered">
+<table class="table table-bordered">
 <tbody>
 <tr>
 <td>
@@ -25,13 +24,6 @@ You are not in any circles. Join circles and start sharing books !
 </tbody>
 </table>
 {% endif %}
-
-<form action="/searchcircles/" method="GET">
-	<div class="input-append">
-	<input class="span6" id="appendedInputButton" size="16" type="text" name="q" placeholder="Search for Circles">
-	<button class="btn" type="submit" class="btn">Go</button>
-	</div>
-</form>
 
 <form action="/createcircle/" method="GET">
 		<input type="submit" value = "Create a new circle" class="btn">
