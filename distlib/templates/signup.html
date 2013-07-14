@@ -8,7 +8,7 @@
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<br/>
+	<a href="/books/">
 	<div class="container-fluid" style="background-color: transparent">
 	<div class="well well-large" style="background-color: transparent">
 	<div class="row-fluid" style="background-color: transparent">
@@ -19,15 +19,28 @@
 		</div>
 	</div>
 	</div>
+	</a>
 	
 	<div class = "hero-unit" style="background-color: transparent">
-	<div class = "row-fluid" style="background-color: transparent">
-	<div class = "span6" style="background-color: transparent">
+    <div class = "row-fluid offset4" style="background-color: transparent">
+	<!-- <div class = "span4 offset4" style="background-color: transparent"> -->
 	<form action="/signup/" class="form-horizontal" method="POST">
 		<div class="control-group">
     		<label class="control-label" for="inputUsername">Username</label>
     		<div class="controls">
       			<input type="text" id="inputUsername" placeholder="Username" name="username">
+    		</div>
+  		</div>
+  		<div class="control-group">
+    		<label class="control-label" for="inputFirstname">Firstname</label>
+    		<div class="controls">
+      			<input type="text" id="inputFirstname" placeholder="Firstname" name="firstname">
+    		</div>
+  		</div>
+  		<div class="control-group">
+    		<label class="control-label" for="inputLastname">Lastname</label>
+    		<div class="controls">
+      			<input type="text" id="inputLastname" placeholder="Lastname" name="lastname">
     		</div>
   		</div>
   		<div class="control-group">
@@ -48,34 +61,34 @@
   			</div>
   		</div>
 	</form>
+	<!-- </div> -->
+    </div>
 	</div>
 	
-			<div class="span6">
-			<div class="page-header">
-              		<h2 align = "center">Get started in 4 easy steps</h2>
-            </div>
-              <div id="myCarousel" class="carousel slide">
-                <div class="carousel-inner">
-                  <div class="item active">
-						<h2 align="center">1. Sign up</h2>
-                  </div>
-                  <div class="item">
-                    	<h2 align="center">2. Add books</h2>
-                  </div>
-                  <div class="item">
-                    	<h2 align="center">3. Join circles</h2>
-                  </div>
-                  <div class="item">
-                    	<h2 align="center">4. Start sharing</h2>
-                  </div>
-                </div>
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-              </div>
-			</div>
-		
-	</div>
-	</div>
+	
+	<div id="booksCarousel" class="carousel slide">
+       <div class="carousel-inner">
+           <div class="item active">
+				<h2 align="center"><img src="../static/carousel-books1.png"></h2>
+           </div>
+           <div class="item">
+                <h2 align="center"><img src="../static/carousel-books2.png"></h2>
+           </div>
+           <div class="item">
+                <h2 align="center"><img src="../static/carousel-books3.png"></h2>
+           </div>
+           <div class="item">
+                <h2 align="center"><img src="../static/carousel-books4.png"></h2>
+           </div>
+       </div>
+       <a class="left carousel-control" href="#booksCarousel" data-slide="prev">&lsaquo;</a>
+       <a class="right carousel-control" href="#booksCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    <script type="text/javascript"> 
+        $('.carousel').carousel({ 
+          interval: 3000 
+        }) 
+    </script>
 	
 	
 	<div class="navbar navbar-fixed-bottom">

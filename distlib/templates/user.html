@@ -30,7 +30,7 @@ Member of the following circles:
 <tbody>
 {% for circle in circles %}
 <tr>
-	<td><a href="/circles/{{ circle}}/">{{ circle }}</a></td>
+	<td><img src="{{ STATIC_URL}}/static/circle.png" class="img-rounded"/>&nbsp; &nbsp;<a href="/circles/{{ circle}}/">{{ circle }}</a></td>
 </tr>
 {% endfor %}
 </tbody>

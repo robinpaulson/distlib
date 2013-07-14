@@ -15,19 +15,31 @@ import urllib2
 import json
 
 def circledetails(request, circlename):
+    u = request.session.get('username','')
     circleobject = Circle.objects.get(circlename=circlename)
     circles = []
     circles.append(circlename)    
     users = getUsersInCircles(circles)
-    userObjects = User.objects.filter(username__in=users)
-    items = Item.objects.filter(bookowner__in=userObjects)
+    ismember = False
+    if u in users:
+        ismember = True
+        
+    userobjects = User.objects.filter(username__in=users)
+    items = Item.objects.filter(bookowner__in=userobjects)
+    
+    print "circlename " + circlename + "\n"
+    print "circletype " + circleobject.circletype + "\n"
+    print "userscount " + str(len(users)) + "\n"
+    print "bookscount " + str(len(items)) + "\n"
+    print "ismember " + str(ismember) + "\n"
     
     return render_to_response("circle.html",
         {"circlename":circlename,
          "circletype":circleobject.circletype,
-         "userscount":userObjects.count(),
-         "bookscount":items.count(),
-         "users":users
+         "userscount":len(users),
+         "bookscount":len(items),
+         "users":users,
+         "ismember": ismember
      })
     
 
@@ -36,7 +48,7 @@ def searchcircles(request):
     userobject = User.objects.get(username = u)
     if not u:
         return render_to_response("login.html")
-    query = request.GET.get('q','')
+    query = request.GET.get('circlename','')
     if query:
         results = Circle.objects.filter(circlename__icontains=query).distinct()
     else:
@@ -46,7 +58,7 @@ def searchcircles(request):
               "results": results,
               "query": query,
               "resulttype": "circles",
-}) 
+})
 
     
 def createcircle(request, firsttime=False):
@@ -100,5 +112,5 @@ def getUsersInCircles(circles):
     circleusers = CircleUsers.objects.filter(circle__in=circleObjects).distinct()
     users = []
     for circleuser in circleusers:
-        users.append(circleuser.user)
+        users.append(circleuser.user.username)
     return users

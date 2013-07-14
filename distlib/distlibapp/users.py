@@ -27,7 +27,12 @@ def userdetails(request, username):
                                    "books": books,
                                    "circles":circles
                                    })
-
+def searchUsers(query):
+    results = []
+    if query:
+        results = User.objects.filter(username__icontains=query).distinct()
+    return results
+        
 def getItemsForUsers(users):
     outerItems = Item.objects.filter(bookowner__in=users).distinct()
     items = []

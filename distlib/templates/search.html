@@ -1,28 +1,29 @@
 {% extends "base.html" %}
 {% block main %}
-<body>
-<h1>Search</h1>
+
+
+<h2>Search</h2>
 
 {% if query %}
-<h2>Results for "{{ query|escape }}":</h2>
-{% if resulttype == "books" %}
-{% if results %}
+Search Results for "{{ query|escape }}":
+
+<br/>
+<br/>
+<table class="table table-striped">
+<tbody>
+
 {% for object in results %}
-<li>{{ object.volume.title }}, {{ object.volume.authors }} of <a href = "/user/{{ object.bookowner }}/"> {{ object.bookowner }} </a> : <a href = "/ask/{{object.bookowner}}/{{ object.title}}/"> ask </a></li>
+<tr>
+	<td><a href="/circles/{{ object }}"> {{ object|escape }} </a></td>
+</tr>
 {% endfor %}
+
 {% else %}
-<p>No books found in your circles</p>
+<tr><td>No circles found</td></tr> 
 {% endif %}
-{% else %}
-{% if results %}
-{% for object in results %}
-<li><a href="/circles/{{ object }}"> {{ object|escape }} </a></li>
-{% endfor %}
-{% else %}
-<p>No circles found. <a href="/createcircle">Create a cicle</a></p>
-{% endif %}
-{% endif %}
-{% endif %}
-</body>
+
+
+</tbody>
+</table>
 
 {% endblock %}

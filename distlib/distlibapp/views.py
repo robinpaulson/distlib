@@ -16,6 +16,7 @@ from django.utils.datetime_safe import datetime
 def books(request):
     userobject = request.session.get('userobject');
     if not userobject:
+        print "NO USER OBJECT !!!!!!!!!!!!!!!!!!"
         return render_to_response("login.html")
     else:
         items = Item.objects.filter(bookowner = userobject)
@@ -82,6 +83,12 @@ def authenticate(request):
 def signup(request):
     username = request.POST.get('username')
     if not username:
+        return render_to_response("signup.html")
+    firstname = request.POST.get('firstname')
+    if not firstname:
+        return render_to_response("signup.html")
+    lastname = request.POST.get('lastname')
+    if not lastname:
         return render_to_response("signup.html")
     password = request.POST.get('password')
     if not password:

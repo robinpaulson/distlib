@@ -21,8 +21,8 @@
 <tbody>
 {% for book in books %}
 <tr>
-	<td><img src = "{{ book.imageurl}}" class="img-rounded" alt="{{ STATIC_URL}}/static/noimage.png"></td>
-	<td>{{ book.title|escape }} - {{book.authors|escape}}</td>
+	<td style="vertical-align: middle"><img src = "{{ book.imageurl}}" class="img-rounded" alt="{{ STATIC_URL}}/static/noimage.png"> &nbsp; &nbsp;
+	 {{ book.title|escape }} - {{book.authors|escape}}</td>
 </tr>
 {% endfor %}
 </tbody>

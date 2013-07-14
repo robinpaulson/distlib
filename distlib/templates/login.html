@@ -8,8 +8,10 @@
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<br/>
-	<div class="container-fluid wrapper" style="background-color: transparent">
+	
+	
+	<!---- header ----->
+	
 	<div class="well well-large wrapper transparent" style="background-color: transparent">
 	<div class="row-fluid wrapper transparent" style="background-color: transparent">
 		<div class="span12 wrapper transparent" style="background-color: transparent">
@@ -19,64 +21,94 @@
 		</div>
 	</div>
 	</div>
-	<div class="hero-unit wrapper transparent" style="background-color: transparent">
-		<div class="row-fluid wrapper transparent" style="background-color: transparent">
-		<div class="span6 wrapper transparent" style="background-color: transparent">
-		<form action="/authenticate/" class="form-horizontal" method="POST">
-		<div class="control-group">
-    		<label class="control-label" for="inputUsername">Username</label>
-    		<div class="controls">
-      			<input type="text" id="inputUsername" placeholder="Username" name="username">
-    		</div>
-  		</div>
-  		<div class="control-group">
-    		<label class="control-label" for="inputPassword">Password</label>
-    		<div class="controls">
-      			<input type="password" id="inputPassword" placeholder="Password" name="password">
-    		</div>
-  		</div>
-  		<div class="control-group">
-  			<div class="controls">
-  			<input type="submit" class="btn" value="Login">
-  			</div>
-  		</div>
-		</form>
-		
-		<form action="/signup/" class="form-horizontal" method="GET">
-		<div class="control-group">
-  			<div class="controls">
-  			<input type="submit" class="btn" value="New User? Signup!">
-  			</div>
-  		</div>
-		</form>
-		</div>
-		<div class="span6">
-			<div class="page-header">
-              		<h2 align = "center">Get started in 4 easy steps</h2>
-            </div>
-              <div id="myCarousel" class="carousel slide">
-                <div class="carousel-inner">
-                  <div class="item active">
-						<h2 align="center">1. Sign up</h2>
-                  </div>
-                  <div class="item">
-                    	<h2 align="center">2. Add books</h2>
-                  </div>
-                  <div class="item">
-                    	<h2 align="center">3. Join circles</h2>
-                  </div>
-                  <div class="item">
-                    	<h2 align="center">4. Start sharing</h2>
-                  </div>
-                </div>
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-              </div>
-			</div>
-		</div>
-		
-	</div>
 	
+	<!-- /header --->
+	
+	<!--- Login Fields ---> 
+	
+	<div class="hero-unit" style="background-color: transparent">
+		<div class="row-fluid">	
+			
+			<!-- normal login column-->
+			<div class="span3 offset2" style="background-color: transparent">
+			<form action="/authenticate/" class="form-horizontal" method="POST">
+				<div class="control-group">
+    				<label class="control-label" for="inputUsername">Username</label>
+    				<div class="controls">
+      					<input type="text" id="inputUsername" placeholder="Username" name="username">
+    				</div>
+        		</div> 
+  				<div class="control-group">
+    				<label class="control-label" for="inputPassword">Password</label>
+    				<div class="controls">
+      					<input type="password" id="inputPassword" placeholder="Password" name="password">
+    				</div>
+  				</div> 
+  				<div class="control-group">
+  					<div class="controls">
+  						<input type="submit" class="btn" value="Login">
+  					</div>
+  				</div> 
+			</form>  
+		
+			<form action="/signup/" class="form-horizontal" method="GET">
+				<div class="control-group">
+  					<div class="controls">
+  						<input type="submit" class="btn" value="New User? Signup!">
+  					</div>
+  				</div>
+			</form> 
+			</div> 
+			<!-- normal login column-->
+
+			
+
+			<!-- fb login -->
+			<div class="span3" style="background-color: transparent">
+			<br/>
+			<br/>
+			<form action="/fblogin/" class="form-horizontal" method="POST">
+				<div class="control-group">
+  					<div class="controls">
+  						<input type = "image" src="../static/sign-in-with-facebook.png">
+  					</div>
+  				</div>
+			</form>
+			</div>
+			<!-- fb login column -->
+		
+		</div> <!-- row-fluid -->
+	</div> <!-- hero unit -->
+	
+	
+	<!----- Carousel --------------->
+	
+	 <div id="booksCarousel" class="carousel slide">
+       <div class="carousel-inner">
+           <div class="item active">
+				<h2 align="center"><img src="../static/carousel-books1.png"></h2>
+           </div>
+           <div class="item">
+                <h2 align="center"><img src="../static/carousel-books2.png"></h2>
+           </div>
+           <div class="item">
+                <h2 align="center"><img src="../static/carousel-books3.png"></h2>
+           </div>
+           <div class="item">
+                <h2 align="center"><img src="../static/carousel-books4.png"></h2>
+           </div>
+       </div>
+       <a class="left carousel-control" href="#booksCarousel" data-slide="prev">&lsaquo;</a>
+       <a class="right carousel-control" href="#booksCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    <script type="text/javascript"> 
+        $('.carousel').carousel({ 
+          interval: 3000 
+        }) 
+    </script>
+    
+    <!-------- Footer -------------------->
+
 	<div class="navbar navbar-fixed-bottom">
 	{% block footer %}
 	<p align="center">Copyright BookCircles.com</p>

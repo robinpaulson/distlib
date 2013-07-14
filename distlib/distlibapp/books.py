@@ -16,8 +16,15 @@ from volumedata import VolumeData
 import urllib2
 import json
 
-def searchbooks(request):
-    ''' Searches for books in the users circles '''
+def searchBooks(query):
+    if query:
+        results = Item.Volume.objects.filter(title__icontains=query).distinct()
+    else:
+        results = []
+    return results
+
+def searchBooksByCircle(request):
+    ''' Searches for books in the users circles'''
     
     u = request.session.get('username', '')
     print "u is %s"  % u

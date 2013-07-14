@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>{{ circlename }}</h2>
+<h2>{{ circlename }} </h2>
 
+{% if not ismember %}
+<form action="/addtocircle/{{ circlename }}/" method="POST">
+<input type="submit" value="Join this circle" class="btn">
+</form>
+{% endif %}
+
+<br>
 
 {% if userscount %}
 <table class="table table-striped table-bordered">
@@ -16,8 +23,6 @@
 </table>
 {% endif %}
 
-<form action="/addtocircle/{{ circlename }}/" method="POST">
-<input type="submit" value="Join this circle" class="btn">
-</form>
+
 
 {% endblock %}
