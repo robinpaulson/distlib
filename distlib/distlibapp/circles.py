@@ -61,19 +61,27 @@ def searchcircles(request):
 })
 
     
-def createcircle(request, firsttime=False):
+def createcircle(request):
     u = request.session.get('username','')
     circlename = request.POST.get('circlename','')
     circletype = request.POST.get('circletype','')
     isprivate = request.POST.get('isprivate', False);
     
+    existsAlready = False
+    circleobject = Circle.objects.filter(circlename=circlename)
+    
+    if len(circleobject) > 0:
+        existsAlready = True
+        
+    if existsAlready:
+        return render_to_response("createcircle.html",
+                                  {"error_message":"Oops, circle name taken."}
+                                  )
+    
     print "circlename is %s circletype is %s" % (circlename, circletype) 
-    if not circlename and not firsttime:
+    if not circlename or not circletype:
         return render_to_response("createcircle.html",
-                                  {"error_message":"circle name invalid"})
-    if not circletype and not firsttime:
-        return render_to_response("createcircle.html",
-                                  {"error_message":"circle name invalid"})
+                                  )
     userobject = User.objects.get(username = u)
     if not u:
         return render_to_response("login.html")
