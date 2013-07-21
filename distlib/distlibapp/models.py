@@ -9,8 +9,6 @@ class User(models.Model):
 	newMessages = models.IntegerField(default=0)
 	def __unicode__(self):
                 return unicode(self.username)
-               
-               
 
 class Circle(models.Model):
 	circlename = models.CharField(max_length=100)

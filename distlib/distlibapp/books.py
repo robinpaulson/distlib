@@ -17,8 +17,9 @@ import urllib2
 import json
 
 def searchBooks(query):
+    volumeObjects = Volume.objects.filter(title__icontains=query).distinct()
     if query:
-        results = Item.Volume.objects.filter(title__icontains=query).distinct()
+        results = Item.objects.filter(volume__in=volumeObjects).distinct()
     else:
         results = []
     return results

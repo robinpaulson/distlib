@@ -8,6 +8,17 @@
 <table class="table table-striped table-bordered" style="vertical-align: middle">
 <tbody>
 {% for notification in notifications %}
+{% if username == notification.fromuser.username %}
+<tr>
+	<td><img src="{{ STATIC_URL}}/static/notification-out.jpg" class="img-rounded"/></td>
+	<td>{{ notification.fromuser }}</td>
+	<td>{{ notification.book }}</td>
+	<td>{{ notification.message }}</td>
+	<td>accept</td>
+	<td>deny</td>
+	<td>ignore</td>
+</tr>
+{% else %}
 <tr>
 	<td><img src="{{ STATIC_URL}}/static/notification.jpg" class="img-rounded"/></td>
 	<td>{{ notification.fromuser }}</td>
@@ -17,6 +28,7 @@
 	<td><a href = "/respond/{{ notification.id }}/deny/">deny</a></td>
 	<td><a href = "/respond/{{ notification.id }}/ignore/">ignore</a></td>
 </tr>
+{% endif %}
 {% endfor %}
 </tbody>
 </table>

@@ -1,29 +1,57 @@
 {% extends "base.html" %}
+
 {% block main %}
 
+<h2>Search Results</h2>
 
-<h2>Search</h2>
+{% if len == 0 %}
+Oops! - Nothing found
+{% endif %}
 
-{% if query %}
-Search Results for "{{ query|escape }}":
-
-<br/>
-<br/>
+{% if books %}
+<h3>Books</h3>
 <table class="table table-striped">
 <tbody>
-
-{% for object in results %}
+{% for book in books %}
 <tr>
-	<td><a href="/circles/{{ object }}"> {{ object|escape }} </a></td>
+	<td><img src="{{ book.volume.imageurl}}" class="img-rounded" alt="{{ STATIC_URL}}/static/noimage.png"/>&nbsp; &nbsp;{{ book.volume.title }} of {{ book.bookowner.username }}</a></td>
 </tr>
 {% endfor %}
+</tbody>
+</table>
+<br/>
+{% endif %}
 
-{% else %}
-<tr><td>No circles found</td></tr> 
+{% if users %}
+<h3>Users</h3>
+<table class="table table-striped">
+<tbody>
+{% for user in users %}
+<tr>
+	<td><img src="{{ STATIC_URL}}/static/user.jpg" class="img-rounded"/>&nbsp; &nbsp;<a href="/user/{{ user.username }}/">{{ user.username }}</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<br/>
 {% endif %}
 
 
+{% if circles %}
+<h3>Circles</h3>
+<table class="table table-striped">
+<tbody>
+{% for circle in circles %}
+<tr>
+	<td><img src="{{ STATIC_URL}}/static/circle.png" class="img-rounded"/>&nbsp; &nbsp;<a href="/circles/{{ circle}}/">{{ circle.circlename }}</a></td>
+</tr>
+{% endfor %}
 </tbody>
 </table>
+<br/>
+{% endif %}
+
+
+
 
 {% endblock %}

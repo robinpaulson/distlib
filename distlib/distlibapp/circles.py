@@ -42,6 +42,12 @@ def circledetails(request, circlename):
          "ismember": ismember
      })
     
+def searchCircles1(query):
+    if query:
+        results = Circle.objects.filter(circlename__icontains=query).distinct()
+    else:
+        results = []
+    return results
 
 def searchcircles(request):
     u = request.session.get('username','')

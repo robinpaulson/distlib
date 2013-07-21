@@ -44,15 +44,18 @@ def circles(request):
             })
 
 def notifications(request):
-    userobject = request.session.get('userobject'); 
+    userobject = request.session.get('userobject') 
+    username = request.session.get('username')
     if not userobject:
         return render_to_response("login.html")
     else:
         #userobject.newMessages = 0;
         #userobject.save();
         request.session['userobject'] = userobject
-        notifications = Notifications.objects.filter(touser=userobject)
+        notifications = Notifications.objects.filter(Q(touser=userobject) | Q(fromuser=userobject))
+        print "user is " + username
         return render_to_response("notifications.html", {
+            "username": username,
             "user": userobject,
             "notifications": notifications
             })

@@ -17,6 +17,7 @@ from distlib.distlibapp.books import books
 from distlib.distlibapp.circles import circles
 from distlib.distlibapp.views import notifications
 from distlib.distlibapp.views import logout
+from distlib.distlibapp.search import search
 from distlib.distlibapp.videotags import getVideoTags
 from distlib.distlibapp.videotags import putVideoTags
 from django.views.generic import TemplateView
@@ -29,6 +30,7 @@ urlpatterns = patterns('',
    (r'^ask/(.*?)/(.*?)/$', ask),
    (r'^asked/(.*?)/(.*?)/$', asked),
     (r'^createcircle/$', createcircle),
+    (r'^search/$', search),
     (r'^searchbooks/$', searchBooksByCircle),
     (r'^searchcircles/$', searchcircles),
     (r'^login/$', login),
