@@ -125,6 +125,45 @@ def asked(request, touser, isbn):
     touserobject = User.objects.get(username = touser)
     type = "ask"
     book = Volume.objects.get(isbn10=isbn)
+    message = request.POST.get('message')
+    print message
+    notificationobject = Notifications.objects.create(fromuser=fromuserobject, touser=touserobject, book=book, message=message, type= type)    
+    return books(request)
+
+def reply(request, user, isbn):
+    username = request.session.get('username')
+    if not username:
+        return render_to_response("signup.html")
+    volume = Volume.objects.get(isbn10 = isbn)
+    return render_to_response("reply.html",{
+                                          "to": user,
+                                          "title": volume.title,
+                                          "isbn": volume.isbn10,
+                                          "imageurl": volume.imageurl,
+    })
+    
+def replied(request, touser, isbn):
+    username = request.session.get('username')
+    fromuserobject = User.objects.get(username = username)
+    if not username:
+        return render_to_response("signup.html")
+    touserobject = User.objects.get(username = touser)
+    type = "ask"
+    book = Volume.objects.get(isbn10=isbn)
+    message = request.POST.get('message')
+    print message
+    notificationobject = Notifications.objects.create(fromuser=fromuserobject, touser=touserobject, book=book, message=message, type= type)    
+    return books(request)
+    
+def addNotification(request, fromuser, touser, isbn):
+    username = request.session.get('username')
+    fromuserobject = User.objects.get(username = username)
+    if not username:
+        return render_to_response("signup.html")
+    fromuserobject = User.objects.get(username = fromuser)
+    touserobject = User.objects.get(username = touser)
+    type = "ask"
+    book = Volume.objects.get(isbn10=isbn)
     item = Item.objects.get(volume=book, bookowner=touserobject)
     message = request.POST.get('message')
     print message

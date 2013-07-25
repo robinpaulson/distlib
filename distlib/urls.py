@@ -13,6 +13,8 @@ from distlib.distlibapp.users import userdetails
 from distlib.distlibapp.circles import addtocircle
 from distlib.distlibapp.views import ask
 from distlib.distlibapp.views import asked
+from distlib.distlibapp.views import reply
+from distlib.distlibapp.views import replied
 from distlib.distlibapp.books import books
 from distlib.distlibapp.circles import circles
 from distlib.distlibapp.views import notifications
@@ -29,6 +31,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
    (r'^ask/(.*?)/(.*?)/$', ask),
    (r'^asked/(.*?)/(.*?)/$', asked),
+      (r'^reply/(.*?)/(.*?)/$', reply),
+   (r'^replied/(.*?)/(.*?)/$', replied),
     (r'^createcircle/$', createcircle),
     (r'^search/$', search),
     (r'^searchbooks/$', searchBooksByCircle),

@@ -41,7 +41,7 @@ class Notifications(models.Model):
 	fromuser = models.ForeignKey(User, related_name='notifications_fromuser')
 	touser = models.ForeignKey(User, related_name='notifications_touser')
 	type = models.CharField(max_length = 99)
-	book = models.ForeignKey(Item)
+	book = models.ForeignKey(Volume)
 	message = models.CharField(max_length = 3999)
 	def __unicode__(self):
                 return "from: %s, to: %s message:%s" % (self.fromuser, self.touser, self.message)

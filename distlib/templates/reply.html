@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form action="/replied/{{ to }}/{{ isbn }}/" method="POST">
+<strong>To:</strong> {{ to }}
+<br/>
+<br/>
+<strong>Title:</strong> {{ title }}
+<br/>
+<br/>
+<strong>Message:</strong> 
+<br/>
+<br/>
+<textarea rows="5" cols="30" name = "message"> 
+</textarea>
+</br>
+<input type="submit" value="Send">
+</form>
+{% endblock %}

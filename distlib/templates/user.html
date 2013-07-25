@@ -11,7 +11,10 @@
 <tr>
 	<td><img src = "{{ book.imageurl}}" class="img-rounded"></td>
 	<td>{{ book.title|escape }} - {{book.authors|escape}}</td>
+	{% if {{user}} == {{thisuser}} %}
+	{% else %}
 	<td><form action="/ask/{{user}}/{{book.isbn10}}/" method="GET"><input type="submit" class="btn" value="Ask this book"></form></td>
+	{% endif %}
 </tr>
 {% endfor %}
 </tbody>
