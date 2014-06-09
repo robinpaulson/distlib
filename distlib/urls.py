@@ -54,7 +54,7 @@ urlpatterns = patterns('',
     (r'^fblogin/',fblogin),
     (r'^$', books),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': 'C:/distlib/distlib/distlibapp/static/'}),                       
+        {'document_root': 'distlib/distlibapp/static/'}),                       
     # Examples:
     # url(r'^$', 'distlib.views.home', name='home'),
     # url(r'^distlib/', include('distlib.foo.urls')),
