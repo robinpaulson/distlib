@@ -12,11 +12,12 @@ from volumedata import VolumeData
 import urllib2
 import json
 from django.utils.datetime_safe import datetime
+from django.core import serializers
 
 def books(request):
     userobject = request.session.get('userobject');
     if not userobject:
-        print "NO USER OBJECT !!!!!!!!!!!!!!!!!!"
+        print "NO USER OBJECT !!!!!!"
         return render_to_response("login.html")
     else:
         items = Item.objects.filter(bookowner = userobject)
